@@ -1,11 +1,11 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const button = document.getElementById('surpriseButton');
-    const surpriseMessage = document.getElementById('surpriseMessage');
+window.addEventListener('scroll', function() {
+    const fadeIns = document.querySelectorAll('.fade-in');
+    const windowHeight = window.innerHeight;
 
-    button.addEventListener('click', function() {
-        if (surpriseMessage.style.display === 'none' || surpriseMessage.style.display === '') {
-            surpriseMessage.style.display = 'block';
-            button.style.display = 'none'; // Hide the button after clicking
+    fadeIns.forEach(function(el) {
+        const elementTop = el.getBoundingClientRect().top;
+        if (elementTop < windowHeight - 100) {
+            el.classList.add('show');
         }
     });
 });
