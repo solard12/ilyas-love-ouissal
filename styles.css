@@ -1,126 +1,250 @@
-body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background: linear-gradient(to right, #ff9a9e, #fad0c4); /* Gradient from pink to light pink */
-    margin: 0;
-    padding: 0;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Love</title>
+    <style>
+        /* Import Google Fonts */
+        @import url('https://ibb.co/tp46BSc');
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-.container {
-    padding: 20px;
-    background: #fff; /* White background for content */
-    border-radius: 15px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    max-width: 600px;
-    margin: 50px auto;
-}
+        body {
+            font-family: 'Raleway', sans-serif;
+            background-color: #d892e6;
+            color: #e7e7e7;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
 
-h1 {
-    color: #ff9a9e; /* Pink */
-    font-size: 2.5em;
-    margin-bottom: 20px;
-    animation: fadeIn 2s ease-out;
-}
+        /* Header - Parallax Background */
+        header {
+            height: 100vh;
+            background: url('header-bg.jpg') no-repeat center center/cover;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background-attachment: fixed;
+            background-size: cover;
+            position: relative;
+        }
 
-.flowers {
-    width: 60%;
-    max-width: 400px;
-    border-radius: 15px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    animation: scaleUp 1.5s ease-out;
-}
+        /* Overlay for better readability */
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(248, 242, 242, 0.5);
+            z-index: 1;
+        }
 
-.message {
-    font-size: 1.2em;
-    color: #444; /* Dark grey */
-    margin: 20px 0;
-    animation: fadeIn 2s ease-out 1s;
-}
+        header h1, header p, .scroll-btn {
+            z-index: 2;
+            position: relative;
+        }
 
-button {
-    background-color: #ff9a9e; /* Deep sky blue */
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    padding: 15px 30px;
-    font-size: 1.2em;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    animation: fadeIn 2s ease-out 2s;
-}
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4em;
+            color: #ffffff;
+            text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.6);
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+        }
 
-button:hover {
-    background-color: #1e90ff; /* Dodger blue */
-    transform: scale(1.1);
-}
+        header p {
+            font-size: 1.5em;
+            color: #000000;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-in-out 0.2s, transform 1s ease-in-out 0.2s;
+        }
 
-footer {
-    margin-top: 30px;
-    font-size: 0.9em;
-    color: #000000; /* Pink */
-}
+        /* Smooth Scroll Button */
+        .scroll-btn {
+            background-color: #fff1f1;
+            color: rgb(0, 0, 0);
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-in-out 0.4s, transform 1s ease-in-out 0.4s;
+        }
 
-.heart {
-    font-size: 1.5em;
-}
+        .scroll-btn:hover {
+            background-color: #cc0000;
+        }
 
-#surpriseMessage {
-    display: none;
-    margin-top: 20px;
-    background: #fce4ec; /* Light pink background */
-    border: 2px solid #0a0104; /* Pink border */
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    animation: fadeIn 2s ease-out;
-}
+        /* Section Styles */
+        section {
+            padding: 100px 50px;
+            text-align: center;
+            background-color: rgba(255, 182, 193, 0.8);
+            margin: 0;
+        }
 
-.love-heart {
-    width: 80px;
-    margin-top: 10px;
-}
+        section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3em;
+            margin-bottom: 50px;
+            position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+        }
 
-.hidden {
-    display: none;
-}
+        /* Photo Grid */
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
 
-/* Animations */
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
+        .photo-grid img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            transition: transform 0.5s, box-shadow 0.5s;
+        }
 
-@keyframes scaleUp {
-    from { transform: scale(0.9); }
-    to { transform: scale(1); }
-}
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.1);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
+        .photo-grid img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+        }
 
-.heart {
-    color: red;
-    font-size: 30px;
-    animation: pulse 1s infinite;
-}
-.special-dates {
-    background-color: #fff0f0;
-    border: 2px dashed #ff6f61;
-    padding: 15px;
-    margin: 20px auto;
-    width: fit-content;
-    border-radius: 10px;
-}
+        /* Love Letters Section */
+        .letters {
+            background-color: #ff7f7f;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin-bottom: 50px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+        }
 
-.special-dates h2 {
-    color: #ff6f61;
-}
+        .letters p {
+            font-size: 1.2em;
+            line-height: 1.8;
+            color: #fff;
+        }
+
+        /* Footer */
+        footer {
+            padding: 50px 0;
+            background: #990000;
+            text-align: center;
+            color: #fff;
+            font-size: 1.2em;
+            letter-spacing: 1px;
+        }
+
+        /* Fade in Animations on Scroll */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Media Queries */
+        @media only screen and (max-width: 768px) {
+            header h1 {
+                font-size: 2.5em;
+            }
+
+            header p {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1 class="fade-in">To My Love</h1>
+        <p class="fade-in">A Journey Filled with Memories, Love, and Joy</p>
+        <a href="#photos"><button class="scroll-btn fade-in">Explore Our Story</button></a>
+    </header>
+
+    <section id="photos">
+        <h2 class="fade-in">Our best pics for my op &#129392; </h2>
+        <div class="photo-grid fade-in">
+            <img src="https://i.ibb.co/3m7b1wW/image-1.jpg" alt="image-1" border="0"></a>
+            <img src="https://i.ibb.co/QKpqXJp/image.jpg" alt="image" border="0"></a>
+            <img src="https://i.ibb.co/qpPGbtW/image-3.jpg" alt="image-3" border="0"></a>
+            <img src="https://i.ibb.co/7pyZ571/image-2.jpg" alt="image-2" border="0"></a>
+        </div>
+    </section>
+
+    <section id="letters">
+        <h2 class="fade-in">Love Letters</h2>
+        <div class="letters fade-in">
+            <p>"My love for you grows stronger every day. You are my world, my heart, and my everything. I am so blessed to have you in my life, now and forever."</p>
+            <p>"Every moment spent with you is a treasure, and I can't wait to make countless more memories with you. I love you, now and always."</p>
+        </div>
+    </section>
+
+    <section id="memories">
+        <h2 class="fade-in">Our Journey Together</h2>
+        <div class="letters fade-in">
+            <p>From our first date to the unforgettable trips and those quiet, beautiful moments at home, each second with you is a memory I cherish deeply.</p>
+            <p>Here’s to the many more adventures and dreams we’ll create side by side.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>Made with Love for You ♥</p>
+    </footer>
+
+    <script>
+        // Scroll-triggered animations
+        window.addEventListener('scroll', function() {
+            const fadeIns = document.querySelectorAll('.fade-in');
+            const windowHeight = window.innerHeight;
+
+            fadeIns.forEach(function(el) {
+                const elementTop = el.getBoundingClientRect().top;
+                if (elementTop < windowHeight - 100) {
+                    el.classList.add('show');
+                }
+            });
+        });
+
+        // Initial animation on page load for header
+        window.onload = function() {
+            const headerText = document.querySelectorAll('header h1, header p, .scroll-btn');
+            headerText.forEach((element, index) => {
+                setTimeout(() => {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }, index * 200); // Staggered animations
+            });
+        };
+    </script>
+
+</body>
+</html>
